@@ -117,9 +117,10 @@ def parse_args():
 
         args.config = '../configs/centernet/centernet_resnet18_dcnv2_140e_coco.py'
         args.checkpoint = 'output/centernet/ckpt/centernet_resnet18_dcnv2_140e_coco_20210520_101209-da388ba2.pth'
-        args.work_dir = 'output/centernet/'
+        args.work_dir = osp.join('output', '/'.join(args.config.split('/')[-2:]).replace('.py', ''), args.extra_tag)
 
-        args.use_profile = True
+
+        args.use_profile = False
         args.fp16 = False  # mAP(0.295==>0.293) TODO become slower(37 tasks/sec ==> 26 taks/sec @GTX1060), why???
         args.fuse_conv_bn = False  # a little bit faster(37 tasks/sec ==> 37.5 taks/sec @GTX1060)
         args.eval = 'bbox'
